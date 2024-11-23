@@ -5,6 +5,7 @@ beautifulsoup4==4.12.3
 certifi==2024.8.30
 click==8.1.7
 distro==1.9.0
+fastapi==0.115.5
 fastcore==1.7.20
 fastlite==0.0.13
 h11==0.14.0

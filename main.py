@@ -1,6 +1,7 @@
 from fasthtml.common import *
 import anthropic, os, base64, uvicorn
 from dotenv import load_dotenv
+from fastapi.staticfiles import StaticFiles  # StaticFiles 추가
 
 load_dotenv()
 
@@ -12,7 +13,11 @@ if not key:
     raise ValueError("Please set the ANTHROPIC_API_KEY environment variable")
 client = anthropic.Anthropic(api_key=key)
 
-app = FastHTML(hdrs=(picolink, Script(open("canvas.js").read(), type="module")))
+#app = FastHTML(hdrs=(picolink, Script(open("canvas.js").read(), type="module")))
+app = FastHTML(hdrs=(picolink, Script("/static/canvas.js", type="module")))  # 정적 파일 경로 수정
+
+# 정적 파일을 서빙하는 라우트 추가
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 def home():
