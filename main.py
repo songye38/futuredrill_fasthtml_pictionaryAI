@@ -13,13 +13,7 @@ if not key:
     raise ValueError("Please set the ANTHROPIC_API_KEY environment variable")
 client = anthropic.Anthropic(api_key=key)
 
-#app = FastHTML(hdrs=(picolink, Script(open("canvas.js").read(), type="module")))
-app = FastHTML(hdrs=(picolink, Script("/canvas.js", type="module")))  # /canvas.js로 변경
-
-#app = FastHTML(hdrs=(picolink, Script("/static/canvas.js", type="module")))  # 정적 파일 경로 수정
-
-# 정적 파일을 서빙하는 라우트 추가
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app = FastHTML(hdrs=(picolink, Script("/canvas.js", type="module")))
 
 @app.get("/")
 def home():
